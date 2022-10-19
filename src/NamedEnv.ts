@@ -22,12 +22,11 @@ export module environments {
      */
     readonly cidr: string;
     /**
-     * The shard for clickup.
+     * The shard within a region.
      */
     readonly shard: IShard;
     /**
      * If a region isn't specified, where should we default to.
-     * Mostly used by `click aws-config`.
      * Also considered for centralized resources.
      */
     readonly defaultRegion: string;
@@ -44,7 +43,7 @@ export module environments {
      */
     readonly regionDetails: Record<string, RegionalDetails>;
     /**
-     * The ClickUp shorthand for the region.
+     * The shorthand for the region.
      *
      * @deprecated use shard.name
      */
@@ -96,7 +95,6 @@ export module environments {
      */
     /**
      * If a region isn't specified, where should we default to.
-     * Mostly used by `click aws-config`.
      * Also considered for centralized resources.
      */
     readonly defaultRegion: string;
