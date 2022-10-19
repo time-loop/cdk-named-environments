@@ -2,7 +2,7 @@
   "name": "@time-loop/cdk-environments",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jglommen/cdk-environments.git"
+    "url": "https://github.com/time-loop/cdk-environments.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -30,8 +30,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Justinon",
-    "email": "jglommen@gmail.com",
+    "name": "ClickUp",
+    "email": "devops@clickup.com",
     "organization": true
   },
   "devDependencies": {
@@ -68,6 +68,9 @@
   "peerDependencies": {
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5"
+  },
+  "dependencies": {
+    "multi-convention-namer": "^0.1.12"
   },
   "keywords": [
     "cdk"
