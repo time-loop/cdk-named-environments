@@ -9,7 +9,7 @@ const project = new clickupCdk.ClickUpCdkConstructLibrary({
   repositoryUrl: 'https://github.com/time-loop/cdk-environments.git',
   projenrcTs: true,
 
-  deps: ['multi-convention-namer'],
+  // deps: [],
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // packageName: undefined,  /* The "name" in package.json. */
 });

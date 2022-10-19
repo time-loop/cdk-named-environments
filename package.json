@@ -69,9 +69,6 @@
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5"
   },
-  "dependencies": {
-    "multi-convention-namer": "^0.1.12"
-  },
   "keywords": [
     "cdk"
   ],
