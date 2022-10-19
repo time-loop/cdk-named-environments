@@ -26,8 +26,8 @@ const namedEnv: environments.NamedEnv = { ... }
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.name">name</a></code> | <code>string</code> | The kebab-name of the environment. |
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: @time-loop/cdk-environments.environments.RegionalDetails}</code> | CIDR details for all regions. |
-| <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.shard">shard</a></code> | <code><a href="#@time-loop/cdk-environments.IShard">IShard</a></code> | The shard for clickup. |
-| <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.shortRegion">shortRegion</a></code> | <code>string</code> | The ClickUp shorthand for the region. |
+| <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.shard">shard</a></code> | <code><a href="#@time-loop/cdk-environments.IShard">IShard</a></code> | The shard within a region. |
+| <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.shortRegion">shortRegion</a></code> | <code>string</code> | The shorthand for the region. |
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
 | <code><a href="#@time-loop/cdk-environments.environments.NamedEnv.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
@@ -124,7 +124,6 @@ public readonly defaultRegion: string;
 
 If a region isn't specified, where should we default to.
 
-Mostly used by `click aws-config`.
 Also considered for centralized resources.
 
 ---
@@ -173,7 +172,7 @@ public readonly shard: IShard;
 
 - *Type:* <a href="#@time-loop/cdk-environments.IShard">IShard</a>
 
-The shard for clickup.
+The shard within a region.
 
 ---
 
@@ -187,7 +186,7 @@ public readonly shortRegion: string;
 
 - *Type:* string
 
-The ClickUp shorthand for the region.
+The shorthand for the region.
 
 ---
 
@@ -332,7 +331,6 @@ public readonly defaultRegion: string;
 
 If a region isn't specified, where should we default to.
 
-Mostly used by `click aws-config`.
 Also considered for centralized resources.
 
 ---
