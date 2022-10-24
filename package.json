@@ -1,8 +1,8 @@
 {
-  "name": "@time-loop/cdk-environments",
+  "name": "@time-loop/cdk-named-environments",
   "repository": {
     "type": "git",
-    "url": "https://github.com/time-loop/cdk-environments.git"
+    "url": "https://github.com/time-loop/cdk-named-environments.git"
   },
   "scripts": {
     "build": "npx projen build",

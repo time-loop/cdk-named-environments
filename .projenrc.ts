@@ -5,8 +5,8 @@ const project = new clickupCdk.ClickUpCdkConstructLibrary({
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
   devDeps: ['@time-loop/clickup-projen'],
-  name: 'cdk-environments',
-  repositoryUrl: 'https://github.com/time-loop/cdk-environments.git',
+  name: 'cdk-named-environments',
+  repositoryUrl: 'https://github.com/time-loop/cdk-named-environments.git',
   projenrcTs: true,
 
   // deps: [],
