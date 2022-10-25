@@ -16,7 +16,6 @@ describe('NamedEnv', () => {
         account: 'fakeAccount',
         defaultRegion: 'fakeRegion',
         zoneName: 'fake.com',
-        attachmentZoneName: 'fakeAttachment.com',
         regionDetails: {},
         organizationalUnit: TestOrganizationalUnit.Test,
       };
@@ -47,7 +46,6 @@ describe('NamedEnv', () => {
           account: 'fakeAccount',
           defaultRegion: 'fakeRegion',
           zoneName: 'fake.com',
-          attachmentZoneName: 'fakeAttachment.com',
           regionDetails: {},
           organizationalUnit: TestOrganizationalUnit.Test,
         };
@@ -60,27 +58,10 @@ describe('NamedEnv', () => {
         };
         factory = environments.newNamedEnvFactory(fakeEnvProps);
       });
-
-      it('has default ASN', () => {
-        const namedEnv = factory(shard);
-        expect(namedEnv.asn).toBe(-1);
-      });
-      it('respects overrideAsn', () => {
-        const namedEnv = factory(shard, 666); // 😈
-        expect(namedEnv.asn).toBe(666);
-      });
-      it('can pull ASN from regionDetails', () => {
-        factory = environments.newNamedEnvFactory({
-          ...fakeEnvProps,
-          regionDetails: {
-            'us-west-2': {
-              asn: 10,
-              cidr: '10.0.0.0/32',
-            },
-          },
-        });
-        const namedEnv = factory(shard);
-        expect(namedEnv.asn).toBe(10);
+      it('takes a shard as input', () => {
+        const testEnv = factory(shard);
+        expect(testEnv).toHaveProperty('shard');
+        expect(testEnv.shard).toEqual(shard);
       });
     });
   });

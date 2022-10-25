@@ -10,73 +10,14 @@ export module environments {
     readonly cidr: string; // in '0.0.0.0/32' format
   }
 
-  export interface NamedEnv extends Environment {
-    /**
-     * The asn to be used for TransitGateways
-     * @deprecated we aren't using tgw (maybe at the regional level for shard support though)
-     */
-    readonly asn: number;
-    /**
-     * Currently the vpc cidr for the region.
-     * @deprecated you probably want the shard specific cidrs
-     */
-    readonly cidr: string;
-    /**
-     * The shard within a region.
-     */
-    readonly shard: IShard;
+  interface NamedEnvCommonProps {
     /**
      * If a region isn't specified, where should we default to.
      * Also considered for centralized resources.
      */
     readonly defaultRegion: string;
     /**
-     * The kebab-name of the environment.
-     */
-    readonly name: string;
-    /**
-     * What kind of an account is this?
-     */
-    readonly organizationalUnit: string;
-    /**
-     * CIDR details for all regions.
-     */
-    readonly regionDetails: Record<string, RegionalDetails>;
-    /**
-     * The shorthand for the region.
-     *
-     * @deprecated use shard.name
-     */
-    readonly shortRegion: string;
-    /**
-     * In which region does SSO live in?
-     */
-    readonly ssoRegion?: string;
-    /**
-     * Is this an SSO accessible account? If so, what's the start url?
-     */
-    readonly ssoStartUrl?: string;
-    /**
-     * The DNS zone into which services should be deployed.
-     */
-    readonly zoneName: string;
-  }
-
-  /**
-   * Used by newNamedEnvFactory. Is it used elsewhere?
-   */
-  export interface NamedEnvironmentProps {
-    /**
-     * The numeric account id as used by cdk.Environment.account
-     */
-    readonly account: string;
-    /**
-     * If a region isn't specified, where should we default to.
-     * Also considered for centralized resources.
-     */
-    readonly defaultRegion: string;
-    /**
-     * A map of region => { asn, cidr }
+     * A map of region => { asn, cidr }, for each region of the environment.
      */
     readonly regionDetails: Record<string, RegionalDetails>;
     /**
@@ -96,9 +37,26 @@ export module environments {
      */
     readonly ssoStartUrl?: string;
     /**
-     * The name of the route53 zone for this account.
+     * The DNS zone into which services should be deployed.
      */
     readonly zoneName: string;
+  }
+
+  export interface NamedEnv extends Environment, NamedEnvCommonProps {
+    /**
+     * The shard within a region.
+     */
+    readonly shard: IShard;
+  }
+
+  /**
+   * Used by newNamedEnvFactory. Is it used elsewhere?
+   */
+  export interface NamedEnvironmentProps extends NamedEnvCommonProps {
+    /**
+     * The numeric account id as used by cdk.Environment.account
+     */
+    readonly account: string;
   }
 
   export interface NamedEnvFactory {
@@ -113,7 +71,10 @@ export module environments {
    * @param props
    * @returns NamedEnv
    */
-  export function newNamedEnvFactory(props: NamedEnvironmentProps): NamedEnvFactory {
+  export function newNamedEnvFactory(
+    props: NamedEnvironmentProps,
+    factory?: (...args: any[]) => NamedEnv,
+  ): NamedEnvFactory {
     if ((props.ssoStartUrl || props.ssoRegion) && !(props.ssoStartUrl && props.ssoRegion)) {
       console.warn(
         `Something is wrong for ${props.name}: ssoStartUrl = ${JSON.stringify(props.ssoStartUrl)} and ssoRegion = ${
@@ -122,20 +83,20 @@ export module environments {
       );
     }
 
-    const namedEnvFactory = function (shard: IShard, asnOverride?: number): NamedEnv {
+    Object.defineProperties(factory, {
+      environmentName: {
+        value: props.name,
+        writable: false,
+      },
+      regionDetails: { value: props.regionDetails, writable: false },
+    });
+    const namedEnvFactory = function (shard: IShard): NamedEnv {
       const region = shard.region;
-      const regionDetails = props.regionDetails[region];
-      const asn = asnOverride || regionDetails?.asn || -1;
-      const cidr = shard.cidr;
-      const shortRegion = shard.name;
 
       return {
         ...props,
-        asn,
         shard,
-        cidr,
         region,
-        shortRegion,
       };
     };
     namedEnvFactory.environmentName = props.name;
