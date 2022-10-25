@@ -63,7 +63,7 @@ export module environments {
     // TODO: should we add shardDetails here?
     readonly environmentName: string;
     readonly regionDetails: Record<string, RegionalDetails>;
-    (shard: IShard, overrideAsn?: number): NamedEnv;
+    (shard: IShard): NamedEnv;
   }
 
   /**
@@ -71,10 +71,7 @@ export module environments {
    * @param props
    * @returns NamedEnv
    */
-  export function newNamedEnvFactory(
-    props: NamedEnvironmentProps,
-    factory?: (...args: any[]) => NamedEnv,
-  ): NamedEnvFactory {
+  export function newNamedEnvFactory(props: NamedEnvironmentProps): NamedEnvFactory {
     if ((props.ssoStartUrl || props.ssoRegion) && !(props.ssoStartUrl && props.ssoRegion)) {
       console.warn(
         `Something is wrong for ${props.name}: ssoStartUrl = ${JSON.stringify(props.ssoStartUrl)} and ssoRegion = ${
@@ -83,20 +80,11 @@ export module environments {
       );
     }
 
-    Object.defineProperties(factory, {
-      environmentName: {
-        value: props.name,
-        writable: false,
-      },
-      regionDetails: { value: props.regionDetails, writable: false },
-    });
     const namedEnvFactory = function (shard: IShard): NamedEnv {
-      const region = shard.region;
-
       return {
         ...props,
         shard,
-        region,
+        region: shard.region,
       };
     };
     namedEnvFactory.environmentName = props.name;
