@@ -1,4 +1,4 @@
-import { IShard, Shard, ShardProps } from '../src';
+import { IShard, Shard, IShardProps } from '../src';
 
 const env = 'QA';
 class TestShardImpl extends Shard {
@@ -7,7 +7,7 @@ class TestShardImpl extends Shard {
   }
 }
 
-const testShardProps: ShardProps = { cidr: '10.0.0.0/0', region: 'us-west-2', number: 1 };
+const testShardProps: IShardProps = { cidr: '10.0.0.0/0', region: 'us-west-2', number: 1 };
 
 let shard: IShard;
 describe('Shard', () => {

@@ -1,4 +1,4 @@
-export interface ShardProps {
+export interface IShardProps {
   /**
    * The cidr for a shard's vpc.
    * Regions typically receive a 10.?.0.0/12 address space,
@@ -15,7 +15,7 @@ export interface ShardProps {
   readonly number: number;
 }
 
-export interface IShard extends ShardProps {
+export interface IShard extends IShardProps {
   /**
    * The proper name for a shard (without numeric suffix).
    */
@@ -27,7 +27,7 @@ export abstract class Shard implements IShard {
   readonly region: string;
   readonly number: number;
 
-  constructor(props: ShardProps) {
+  constructor(props: IShardProps) {
     this.cidr = props.cidr;
     this.region = props.region;
     this.number = props.number;
