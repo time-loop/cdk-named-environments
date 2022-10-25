@@ -60,10 +60,6 @@ export module environments {
      * The DNS zone into which services should be deployed.
      */
     readonly zoneName: string;
-    /**
-     * The DNS zone for attachments
-     */
-    readonly attachmentZoneName: string;
   }
 
   /**
@@ -74,25 +70,6 @@ export module environments {
      * The numeric account id as used by cdk.Environment.account
      */
     readonly account: string;
-    /**
-     * Mapping of regions to CIDR bases.
-     * Only override if you need to have subnets from one account not over-lapping subnets from another.
-     * This is an anti-pattern and we should avoid it where possible.
-     *
-     * @default - see belos
-     * {
-     *  'ap-northeast-2': '10.0.0.0/12',
-     *  'ap-south-1': '10.16.0.0/12',
-     *  'ap-southeast-2': '10.32.0.0/12',
-     *  'eu-central-1': '10.48.0.0/12' ,
-     *  'eu-west-1': '10.64.0.0/12',
-     *  'sa-east-1': '10.80.0.0/12',
-     *  'us-east-1': '10.96.0.0/12',
-     *  'us-east-2': '10.112.0.0/12',
-     *  'us-west-1': '10.128.0.0/12',
-     *  'us-west-2': '10.144.0.0/12',
-     * },
-     */
     /**
      * If a region isn't specified, where should we default to.
      * Also considered for centralized resources.
@@ -122,10 +99,6 @@ export module environments {
      * The name of the route53 zone for this account.
      */
     readonly zoneName: string;
-    /**
-     * The DNS zone for attachments
-     */
-    readonly attachmentZoneName: string;
   }
 
   export interface NamedEnvFactory {
