@@ -19,15 +19,11 @@ const namedEnv: environments.NamedEnv = { ... }
 | --- | --- | --- |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.account">account</a></code> | <code>string</code> | The AWS account ID for this environment. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.region">region</a></code> | <code>string</code> | The AWS region for this environment. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.asn">asn</a></code> | <code>number</code> | The asn to be used for TransitGateways. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.attachmentZoneName">attachmentZoneName</a></code> | <code>string</code> | The DNS zone for attachments. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.cidr">cidr</a></code> | <code>string</code> | Currently the vpc cidr for the region. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.name">name</a></code> | <code>string</code> | The kebab-name of the environment. |
+| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.name">name</a></code> | <code>string</code> | The proper name of the environment in kebab-format. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}</code> | CIDR details for all regions. |
+| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}</code> | A map of region => { asn, cidr }, for each region of the environment. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.shard">shard</a></code> | <code><a href="#@time-loop/cdk-named-environments.IShard">IShard</a></code> | The shard within a region. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.shortRegion">shortRegion</a></code> | <code>string</code> | The shorthand for the region. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnv.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
@@ -74,46 +70,6 @@ will cause this stack to emit synthesis errors.
 
 ---
 
-##### ~~`asn`~~<sup>Required</sup> <a name="asn" id="@time-loop/cdk-named-environments.environments.NamedEnv.property.asn"></a>
-
-- *Deprecated:* we aren't using tgw (maybe at the regional level for shard support though)
-
-```typescript
-public readonly asn: number;
-```
-
-- *Type:* number
-
-The asn to be used for TransitGateways.
-
----
-
-##### `attachmentZoneName`<sup>Required</sup> <a name="attachmentZoneName" id="@time-loop/cdk-named-environments.environments.NamedEnv.property.attachmentZoneName"></a>
-
-```typescript
-public readonly attachmentZoneName: string;
-```
-
-- *Type:* string
-
-The DNS zone for attachments.
-
----
-
-##### ~~`cidr`~~<sup>Required</sup> <a name="cidr" id="@time-loop/cdk-named-environments.environments.NamedEnv.property.cidr"></a>
-
-- *Deprecated:* you probably want the shard specific cidrs
-
-```typescript
-public readonly cidr: string;
-```
-
-- *Type:* string
-
-Currently the vpc cidr for the region.
-
----
-
 ##### `defaultRegion`<sup>Required</sup> <a name="defaultRegion" id="@time-loop/cdk-named-environments.environments.NamedEnv.property.defaultRegion"></a>
 
 ```typescript
@@ -136,7 +92,7 @@ public readonly name: string;
 
 - *Type:* string
 
-The kebab-name of the environment.
+The proper name of the environment in kebab-format.
 
 ---
 
@@ -160,7 +116,7 @@ public readonly regionDetails: {[ key: string ]: RegionalDetails};
 
 - *Type:* {[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}
 
-CIDR details for all regions.
+A map of region => { asn, cidr }, for each region of the environment.
 
 ---
 
@@ -173,20 +129,6 @@ public readonly shard: IShard;
 - *Type:* <a href="#@time-loop/cdk-named-environments.IShard">IShard</a>
 
 The shard within a region.
-
----
-
-##### ~~`shortRegion`~~<sup>Required</sup> <a name="shortRegion" id="@time-loop/cdk-named-environments.environments.NamedEnv.property.shortRegion"></a>
-
-- *Deprecated:* use shard.name
-
-```typescript
-public readonly shortRegion: string;
-```
-
-- *Type:* string
-
-The shorthand for the region.
 
 ---
 
@@ -286,12 +228,11 @@ const namedEnvironmentProps: environments.NamedEnvironmentProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.account">account</a></code> | <code>string</code> | The numeric account id as used by cdk.Environment.account. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.attachmentZoneName">attachmentZoneName</a></code> | <code>string</code> | The DNS zone for attachments. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.name">name</a></code> | <code>string</code> | The proper name of the environment in kebab-format. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}</code> | A map of region => { asn, cidr }. |
-| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.zoneName">zoneName</a></code> | <code>string</code> | The name of the route53 zone for this account. |
+| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}</code> | A map of region => { asn, cidr }, for each region of the environment. |
+| <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
 | <code><a href="#@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
 
@@ -306,18 +247,6 @@ public readonly account: string;
 - *Type:* string
 
 The numeric account id as used by cdk.Environment.account.
-
----
-
-##### `attachmentZoneName`<sup>Required</sup> <a name="attachmentZoneName" id="@time-loop/cdk-named-environments.environments.NamedEnvironmentProps.property.attachmentZoneName"></a>
-
-```typescript
-public readonly attachmentZoneName: string;
-```
-
-- *Type:* string
-
-The DNS zone for attachments.
 
 ---
 
@@ -367,7 +296,7 @@ public readonly regionDetails: {[ key: string ]: RegionalDetails};
 
 - *Type:* {[ key: string ]: @time-loop/cdk-named-environments.environments.RegionalDetails}
 
-A map of region => { asn, cidr }.
+A map of region => { asn, cidr }, for each region of the environment.
 
 ---
 
@@ -379,7 +308,7 @@ public readonly zoneName: string;
 
 - *Type:* string
 
-The name of the route53 zone for this account.
+The DNS zone into which services should be deployed.
 
 ---
 
