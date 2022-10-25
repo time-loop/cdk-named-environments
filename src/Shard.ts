@@ -1,4 +1,4 @@
-export interface IShard {
+export interface IShardProps {
   /**
    * The cidr for a shard's vpc.
    * Regions typically receive a 10.?.0.0/12 address space,
@@ -10,13 +10,32 @@ export interface IShard {
    */
   readonly region: string;
   /**
-   * The proper name for a shard (without numeric suffix).
-   */
-  readonly name: string;
-  /**
    * The shard-number within the region.
    */
   readonly number: number;
+}
 
-  toString(): string;
+export interface IShard extends IShardProps {
+  /**
+   * The proper name for a shard (without numeric suffix).
+   */
+  readonly name: string;
+}
+
+export abstract class Shard implements IShard {
+  readonly cidr: string;
+  readonly region: string;
+  readonly number: number;
+
+  constructor(props: IShardProps) {
+    this.cidr = props.cidr;
+    this.region = props.region;
+    this.number = props.number;
+  }
+
+  /**
+   * There are numerous different ways to name a shard. Pick one and stick with
+   * it.
+   */
+  abstract get name(): string;
 }
