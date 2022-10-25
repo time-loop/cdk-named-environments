@@ -134,7 +134,7 @@ jobs:
         with:
           datadog_api_key: ${{ secrets.DD_PROJEN_RELEASE_API_KEY }}
           datadog_us: true
-          event_title: Released @time-loop/cdk-environments version ${{ steps.event_metadata.outputs.release_tag }}
-          event_text: Released @time-loop/cdk-environments version ${{ steps.event_metadata.outputs.release_tag }}
+          event_title: Released @time-loop/cdk-named-environments version ${{ steps.event_metadata.outputs.release_tag }}
+          event_text: Released @time-loop/cdk-named-environments version ${{ steps.event_metadata.outputs.release_tag }}
           event_priority: normal
-          event_tags: "['project:@time-loop/cdk-environments','release:true','version:${{ steps.event_metadata.outputs.release_tag }}','actor:${{ github.actor }}']"
+          event_tags: "['project:@time-loop/cdk-named-environments','release:true','version:${{ steps.event_metadata.outputs.release_tag }}','actor:${{ github.actor }}']"
