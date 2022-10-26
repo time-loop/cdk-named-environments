@@ -7,7 +7,7 @@ class TestShardImpl extends Shard {
   }
 }
 
-const testShardProps: IShardProps = { cidr: '10.0.0.0/0', region: 'us-west-2', number: 1 };
+const testShardProps: IShardProps = { region: 'us-west-2', number: 1 };
 
 let shard: IShard;
 describe('Shard', () => {
@@ -15,9 +15,6 @@ describe('Shard', () => {
     shard = new TestShardImpl(testShardProps);
   });
 
-  it('sets CIDR correctly', () => {
-    expect(shard.cidr).toEqual(testShardProps.cidr);
-  });
   it('sets region correctly', () => {
     expect(shard.region).toEqual(testShardProps.region);
   });
