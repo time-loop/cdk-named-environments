@@ -51,7 +51,6 @@ describe('NamedEnv', () => {
         };
 
         shard = {
-          cidr: '10.0.0.0/0',
           region: 'us-west-2',
           name: 'TestShard',
           number: 1,

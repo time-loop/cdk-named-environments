@@ -1,11 +1,5 @@
 export interface IShardProps {
   /**
-   * The cidr for a shard's vpc.
-   * Regions typically receive a 10.?.0.0/12 address space,
-   * within which there are 16 /16 subnets for shards.
-   */
-  readonly cidr: string;
-  /**
    * The AWS region for a shard.
    */
   readonly region: string;
@@ -23,12 +17,10 @@ export interface IShard extends IShardProps {
 }
 
 export abstract class Shard implements IShard {
-  readonly cidr: string;
   readonly region: string;
   readonly number: number;
 
   constructor(props: IShardProps) {
-    this.cidr = props.cidr;
     this.region = props.region;
     this.number = props.number;
   }
