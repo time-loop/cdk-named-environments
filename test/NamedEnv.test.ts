@@ -1,12 +1,12 @@
 import 'process';
 import { IShard } from '../src';
-import { environments } from '../src/NamedEnv';
+import { newNamedEnvFactory, NamedEnvFactory, NamedEnvironmentProps } from '../src/NamedEnv';
 
 enum TestOrganizationalUnit {
   Test = 'dev',
 }
 
-let fakeEnvProps: environments.NamedEnvironmentProps;
+let fakeEnvProps: NamedEnvironmentProps;
 
 describe('NamedEnv', () => {
   describe('functionality', () => {
@@ -23,7 +23,7 @@ describe('NamedEnv', () => {
 
     it('warns when has ssoStartUrl, but not ssoRegion', () => {
       const fakeWarn = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-      environments.newNamedEnvFactory({ ...fakeEnvProps, ssoStartUrl: 'fakeStartUrl' });
+      newNamedEnvFactory({ ...fakeEnvProps, ssoStartUrl: 'fakeStartUrl' });
       expect(fakeWarn).toHaveBeenCalledTimes(1);
       expect(fakeWarn).toHaveBeenCalledWith(
         'Something is wrong for sandbox: ssoStartUrl = "fakeStartUrl" and ssoRegion = undefined, but either both or neither of these should be set.',
@@ -31,7 +31,7 @@ describe('NamedEnv', () => {
     });
     it('throws when has ssoRegion, but not ssoStartUrl', () => {
       const fakeWarn = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-      environments.newNamedEnvFactory({ ...fakeEnvProps, ssoRegion: 'fakeSsoRegion' });
+      newNamedEnvFactory({ ...fakeEnvProps, ssoRegion: 'fakeSsoRegion' });
       expect(fakeWarn).toHaveBeenCalledTimes(1);
       expect(fakeWarn).toHaveBeenCalledWith(
         'Something is wrong for sandbox: ssoStartUrl = undefined and ssoRegion = fakeSsoRegion, but either both or neither of these should be set.',
@@ -39,7 +39,7 @@ describe('NamedEnv', () => {
     });
     describe('namedEnvFactory', () => {
       let shard: IShard;
-      let factory: environments.NamedEnvFactory;
+      let factory: NamedEnvFactory;
       beforeEach(() => {
         fakeEnvProps = {
           name: 'sandbox',
@@ -56,7 +56,7 @@ describe('NamedEnv', () => {
           name: 'TestShard',
           number: 1,
         };
-        factory = environments.newNamedEnvFactory(fakeEnvProps);
+        factory = newNamedEnvFactory(fakeEnvProps);
       });
       it('takes a shard as input', () => {
         const testEnv = factory(shard);
