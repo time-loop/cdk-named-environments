@@ -1,12 +1,12 @@
 import 'process';
 import { IShard } from '../src';
-import { newNamedEnvFactory, NamedEnvProps, NamedEnvFactory, NamedEnv } from '../src/NamedEnv';
+import { newNamedEnvFactory, NamedEnvFactoryProps, NamedEnvFactory, NamedEnv } from '../src/NamedEnv';
 
 enum TestOrganizationalUnit {
   Test = 'dev',
 }
 
-const fakeEnvProps: NamedEnvProps = {
+const fakeEnvProps: NamedEnvFactoryProps = {
   account: 'fakeAccount',
   defaultRegion: 'fakeRegion',
   name: 'sandbox',

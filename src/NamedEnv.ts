@@ -29,10 +29,7 @@ export interface NamedEnvCommonProps {
   readonly zoneName: string;
 }
 
-/**
- * Used by newNamedEnvFactory. Is it used elsewhere?
- */
-export interface NamedEnvProps extends NamedEnvCommonProps {
+interface NamedEnvFactoryCommonProps {
   /**
    * The numeric account id as used by cdk.Environment.account
    */
@@ -43,6 +40,11 @@ export interface NamedEnvProps extends NamedEnvCommonProps {
    */
   readonly shards: IShard[];
 }
+
+/**
+ * Used by newNamedEnvFactory. Is it used elsewhere?
+ */
+export interface NamedEnvFactoryProps extends NamedEnvCommonProps, NamedEnvFactoryCommonProps {}
 
 export interface NamedEnv extends Environment, NamedEnvCommonProps {
   /**
@@ -54,19 +56,11 @@ export interface NamedEnv extends Environment, NamedEnvCommonProps {
 /**
  * Generator of NamedEnv objects.
  */
-export interface NamedEnvFactory {
-  /**
-   * The numeric account id as used by cdk.Environment.account
-   */
-  readonly account: string;
+export interface NamedEnvFactory extends NamedEnvFactoryCommonProps {
   /**
    * The proper name of the environment.
    */
   readonly environmentName: string;
-  /**
-   * Enumerates all existing shards grouped in the NamedEnv.
-   */
-  readonly shards: IShard[];
   /**
    * Callable function to generate a NamedEnv from this factory.
    */
@@ -78,7 +72,7 @@ export interface NamedEnvFactory {
  * @param props
  * @returns NamedEnv
  */
-export function newNamedEnvFactory(props: NamedEnvProps): NamedEnvFactory {
+export function newNamedEnvFactory(props: NamedEnvFactoryProps): NamedEnvFactory {
   if ((props.ssoStartUrl || props.ssoRegion) && !(props.ssoStartUrl && props.ssoRegion)) {
     console.warn(
       `Something is wrong for ${props.name}: ssoStartUrl = ${JSON.stringify(props.ssoStartUrl)} and ssoRegion = ${
