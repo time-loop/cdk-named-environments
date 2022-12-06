@@ -8,6 +8,7 @@ const project = new clickupCdk.ClickUpCdkConstructLibrary({
   name: 'cdk-named-environments',
   repositoryUrl: 'https://github.com/time-loop/cdk-named-environments.git',
   projenrcTs: true,
+  minMajorVersion: 1,
 
   // deps: [],
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
