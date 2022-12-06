@@ -20,9 +20,8 @@ const namedEnv: NamedEnv = { ... }
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.account">account</a></code> | <code>string</code> | The AWS account ID for this environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.region">region</a></code> | <code>string</code> | The AWS region for this environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.name">name</a></code> | <code>string</code> | The proper name of the environment in kebab-format. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.name">name</a></code> | <code>string</code> | The proper name of the environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}</code> | A map of region => { asn, cidr }, for each region of the environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnv.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
@@ -92,7 +91,7 @@ public readonly name: string;
 
 - *Type:* string
 
-The proper name of the environment in kebab-format.
+The proper name of the environment.
 
 ---
 
@@ -105,18 +104,6 @@ public readonly organizationalUnit: string;
 - *Type:* string
 
 What kind of an account is this?
-
----
-
-##### `regionDetails`<sup>Required</sup> <a name="regionDetails" id="@time-loop/cdk-named-environments.NamedEnv.property.regionDetails"></a>
-
-```typescript
-public readonly regionDetails: {[ key: string ]: RegionalDetails};
-```
-
-- *Type:* {[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}
-
-A map of region => { asn, cidr }, for each region of the environment.
 
 ---
 
@@ -185,9 +172,8 @@ const namedEnvCommonProps: NamedEnvCommonProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.name">name</a></code> | <code>string</code> | The proper name of the environment in kebab-format. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.name">name</a></code> | <code>string</code> | The proper name of the environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}</code> | A map of region => { asn, cidr }, for each region of the environment. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
 | <code><a href="#@time-loop/cdk-named-environments.NamedEnvCommonProps.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
@@ -216,7 +202,7 @@ public readonly name: string;
 
 - *Type:* string
 
-The proper name of the environment in kebab-format.
+The proper name of the environment.
 
 ---
 
@@ -229,18 +215,6 @@ public readonly organizationalUnit: string;
 - *Type:* string
 
 What kind of an account is this?
-
----
-
-##### `regionDetails`<sup>Required</sup> <a name="regionDetails" id="@time-loop/cdk-named-environments.NamedEnvCommonProps.property.regionDetails"></a>
-
-```typescript
-public readonly regionDetails: {[ key: string ]: RegionalDetails};
-```
-
-- *Type:* {[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}
-
-A map of region => { asn, cidr }, for each region of the environment.
 
 ---
 
@@ -284,6 +258,8 @@ If so, what's the start url?
 
 ### NamedEnvFactory <a name="NamedEnvFactory" id="@time-loop/cdk-named-environments.NamedEnvFactory"></a>
 
+Generator of NamedEnv objects.
+
 #### Initializer <a name="Initializer" id="@time-loop/cdk-named-environments.NamedEnvFactory.Initializer"></a>
 
 ```typescript
@@ -296,8 +272,21 @@ const namedEnvFactory: NamedEnvFactory = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvFactory.property.environmentName">environmentName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvFactory.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}</code> | *No description.* |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvFactory.property.account">account</a></code> | <code>string</code> | The numeric account id as used by cdk.Environment.account. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvFactory.property.environmentName">environmentName</a></code> | <code>string</code> | The proper name of the environment. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvFactory.property.shards">shards</a></code> | <code><a href="#@time-loop/cdk-named-environments.IShard">IShard</a>[]</code> | Enumerates all existing shards grouped in the NamedEnv. |
+
+---
+
+##### `account`<sup>Required</sup> <a name="account" id="@time-loop/cdk-named-environments.NamedEnvFactory.property.account"></a>
+
+```typescript
+public readonly account: string;
+```
+
+- *Type:* string
+
+The numeric account id as used by cdk.Environment.account.
 
 ---
 
@@ -309,48 +298,52 @@ public readonly environmentName: string;
 
 - *Type:* string
 
+The proper name of the environment.
+
 ---
 
-##### `regionDetails`<sup>Required</sup> <a name="regionDetails" id="@time-loop/cdk-named-environments.NamedEnvFactory.property.regionDetails"></a>
+##### `shards`<sup>Required</sup> <a name="shards" id="@time-loop/cdk-named-environments.NamedEnvFactory.property.shards"></a>
 
 ```typescript
-public readonly regionDetails: {[ key: string ]: RegionalDetails};
+public readonly shards: IShard[];
 ```
 
-- *Type:* {[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}
+- *Type:* <a href="#@time-loop/cdk-named-environments.IShard">IShard</a>[]
+
+Enumerates all existing shards grouped in the NamedEnv.
 
 ---
 
-### NamedEnvironmentProps <a name="NamedEnvironmentProps" id="@time-loop/cdk-named-environments.NamedEnvironmentProps"></a>
+### NamedEnvProps <a name="NamedEnvProps" id="@time-loop/cdk-named-environments.NamedEnvProps"></a>
 
 Used by newNamedEnvFactory.
 
 Is it used elsewhere?
 
-#### Initializer <a name="Initializer" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="@time-loop/cdk-named-environments.NamedEnvProps.Initializer"></a>
 
 ```typescript
-import { NamedEnvironmentProps } from '@time-loop/cdk-named-environments'
+import { NamedEnvProps } from '@time-loop/cdk-named-environments'
 
-const namedEnvironmentProps: NamedEnvironmentProps = { ... }
+const namedEnvProps: NamedEnvProps = { ... }
 ```
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.name">name</a></code> | <code>string</code> | The proper name of the environment in kebab-format. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.regionDetails">regionDetails</a></code> | <code>{[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}</code> | A map of region => { asn, cidr }, for each region of the environment. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
-| <code><a href="#@time-loop/cdk-named-environments.NamedEnvironmentProps.property.account">account</a></code> | <code>string</code> | The numeric account id as used by cdk.Environment.account. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.defaultRegion">defaultRegion</a></code> | <code>string</code> | If a region isn't specified, where should we default to. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.name">name</a></code> | <code>string</code> | The proper name of the environment. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.organizationalUnit">organizationalUnit</a></code> | <code>string</code> | What kind of an account is this? |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.zoneName">zoneName</a></code> | <code>string</code> | The DNS zone into which services should be deployed. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.ssoRegion">ssoRegion</a></code> | <code>string</code> | In which region does SSO live in? |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.ssoStartUrl">ssoStartUrl</a></code> | <code>string</code> | Is this an SSO accessible account? |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.account">account</a></code> | <code>string</code> | The numeric account id as used by cdk.Environment.account. |
+| <code><a href="#@time-loop/cdk-named-environments.NamedEnvProps.property.shards">shards</a></code> | <code><a href="#@time-loop/cdk-named-environments.IShard">IShard</a>[]</code> | Enumerates all existing shards grouped in the NamedEnv. |
 
 ---
 
-##### `defaultRegion`<sup>Required</sup> <a name="defaultRegion" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.defaultRegion"></a>
+##### `defaultRegion`<sup>Required</sup> <a name="defaultRegion" id="@time-loop/cdk-named-environments.NamedEnvProps.property.defaultRegion"></a>
 
 ```typescript
 public readonly defaultRegion: string;
@@ -364,7 +357,7 @@ Also considered for centralized resources.
 
 ---
 
-##### `name`<sup>Required</sup> <a name="name" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.name"></a>
+##### `name`<sup>Required</sup> <a name="name" id="@time-loop/cdk-named-environments.NamedEnvProps.property.name"></a>
 
 ```typescript
 public readonly name: string;
@@ -372,11 +365,11 @@ public readonly name: string;
 
 - *Type:* string
 
-The proper name of the environment in kebab-format.
+The proper name of the environment.
 
 ---
 
-##### `organizationalUnit`<sup>Required</sup> <a name="organizationalUnit" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.organizationalUnit"></a>
+##### `organizationalUnit`<sup>Required</sup> <a name="organizationalUnit" id="@time-loop/cdk-named-environments.NamedEnvProps.property.organizationalUnit"></a>
 
 ```typescript
 public readonly organizationalUnit: string;
@@ -388,19 +381,7 @@ What kind of an account is this?
 
 ---
 
-##### `regionDetails`<sup>Required</sup> <a name="regionDetails" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.regionDetails"></a>
-
-```typescript
-public readonly regionDetails: {[ key: string ]: RegionalDetails};
-```
-
-- *Type:* {[ key: string ]: <a href="#@time-loop/cdk-named-environments.RegionalDetails">RegionalDetails</a>}
-
-A map of region => { asn, cidr }, for each region of the environment.
-
----
-
-##### `zoneName`<sup>Required</sup> <a name="zoneName" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.zoneName"></a>
+##### `zoneName`<sup>Required</sup> <a name="zoneName" id="@time-loop/cdk-named-environments.NamedEnvProps.property.zoneName"></a>
 
 ```typescript
 public readonly zoneName: string;
@@ -412,7 +393,7 @@ The DNS zone into which services should be deployed.
 
 ---
 
-##### `ssoRegion`<sup>Optional</sup> <a name="ssoRegion" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.ssoRegion"></a>
+##### `ssoRegion`<sup>Optional</sup> <a name="ssoRegion" id="@time-loop/cdk-named-environments.NamedEnvProps.property.ssoRegion"></a>
 
 ```typescript
 public readonly ssoRegion: string;
@@ -424,7 +405,7 @@ In which region does SSO live in?
 
 ---
 
-##### `ssoStartUrl`<sup>Optional</sup> <a name="ssoStartUrl" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.ssoStartUrl"></a>
+##### `ssoStartUrl`<sup>Optional</sup> <a name="ssoStartUrl" id="@time-loop/cdk-named-environments.NamedEnvProps.property.ssoStartUrl"></a>
 
 ```typescript
 public readonly ssoStartUrl: string;
@@ -438,7 +419,7 @@ If so, what's the start url?
 
 ---
 
-##### `account`<sup>Required</sup> <a name="account" id="@time-loop/cdk-named-environments.NamedEnvironmentProps.property.account"></a>
+##### `account`<sup>Required</sup> <a name="account" id="@time-loop/cdk-named-environments.NamedEnvProps.property.account"></a>
 
 ```typescript
 public readonly account: string;
@@ -450,44 +431,15 @@ The numeric account id as used by cdk.Environment.account.
 
 ---
 
-### RegionalDetails <a name="RegionalDetails" id="@time-loop/cdk-named-environments.RegionalDetails"></a>
-
-#### Initializer <a name="Initializer" id="@time-loop/cdk-named-environments.RegionalDetails.Initializer"></a>
+##### `shards`<sup>Required</sup> <a name="shards" id="@time-loop/cdk-named-environments.NamedEnvProps.property.shards"></a>
 
 ```typescript
-import { RegionalDetails } from '@time-loop/cdk-named-environments'
-
-const regionalDetails: RegionalDetails = { ... }
+public readonly shards: IShard[];
 ```
 
-#### Properties <a name="Properties" id="Properties"></a>
+- *Type:* <a href="#@time-loop/cdk-named-environments.IShard">IShard</a>[]
 
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@time-loop/cdk-named-environments.RegionalDetails.property.asn">asn</a></code> | <code>number</code> | *No description.* |
-| <code><a href="#@time-loop/cdk-named-environments.RegionalDetails.property.cidr">cidr</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `asn`<sup>Required</sup> <a name="asn" id="@time-loop/cdk-named-environments.RegionalDetails.property.asn"></a>
-
-```typescript
-public readonly asn: number;
-```
-
-- *Type:* number
-
----
-
-##### ~~`cidr`~~<sup>Required</sup> <a name="cidr" id="@time-loop/cdk-named-environments.RegionalDetails.property.cidr"></a>
-
-- *Deprecated:* you should probably be using the shard's cidr.
-
-```typescript
-public readonly cidr: string;
-```
-
-- *Type:* string
+Enumerates all existing shards grouped in the NamedEnv.
 
 ---
 
