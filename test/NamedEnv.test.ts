@@ -1,26 +1,22 @@
 import 'process';
 import { IShard } from '../src';
-import { newNamedEnvFactory, NamedEnvFactory, NamedEnvironmentProps } from '../src/NamedEnv';
+import { newNamedEnvFactory, NamedEnvProps, NamedEnvFactory, NamedEnv } from '../src/NamedEnv';
 
 enum TestOrganizationalUnit {
   Test = 'dev',
 }
 
-let fakeEnvProps: NamedEnvironmentProps;
+const fakeEnvProps: NamedEnvProps = {
+  account: 'fakeAccount',
+  defaultRegion: 'fakeRegion',
+  name: 'sandbox',
+  organizationalUnit: TestOrganizationalUnit.Test,
+  shards: [],
+  zoneName: 'fake.com',
+};
 
 describe('NamedEnv', () => {
-  describe('functionality', () => {
-    beforeEach(() => {
-      fakeEnvProps = {
-        name: 'sandbox',
-        account: 'fakeAccount',
-        defaultRegion: 'fakeRegion',
-        zoneName: 'fake.com',
-        regionDetails: {},
-        organizationalUnit: TestOrganizationalUnit.Test,
-      };
-    });
-
+  describe('newNamedEnvFactory', () => {
     it('warns when has ssoStartUrl, but not ssoRegion', () => {
       const fakeWarn = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
       newNamedEnvFactory({ ...fakeEnvProps, ssoStartUrl: 'fakeStartUrl' });
@@ -37,30 +33,41 @@ describe('NamedEnv', () => {
         'Something is wrong for sandbox: ssoStartUrl = undefined and ssoRegion = fakeSsoRegion, but either both or neither of these should be set.',
       );
     });
-    describe('namedEnvFactory', () => {
-      let shard: IShard;
-      let factory: NamedEnvFactory;
-      beforeEach(() => {
-        fakeEnvProps = {
-          name: 'sandbox',
-          account: 'fakeAccount',
-          defaultRegion: 'fakeRegion',
-          zoneName: 'fake.com',
-          regionDetails: {},
-          organizationalUnit: TestOrganizationalUnit.Test,
-        };
+    it('appropriately sets environmentName', () => {
+      const factory = newNamedEnvFactory(fakeEnvProps);
+      expect(factory).toHaveProperty('environmentName', fakeEnvProps.name);
+    });
+    it('appropriately sets shards', () => {
+      const factory = newNamedEnvFactory(fakeEnvProps);
+      expect(factory).toHaveProperty('shards', fakeEnvProps.shards);
+    });
+    it('returns a callable NamedEnv generator function', () => {
+      const factory = newNamedEnvFactory(fakeEnvProps);
+      expect(factory).toBeInstanceOf(Function);
+    });
 
-        shard = {
-          region: 'us-west-2',
-          name: 'TestShard',
-          number: 1,
-        };
+    describe('NamedEnvFactory', () => {
+      const shard: IShard = {
+        region: 'us-west-2',
+        name: 'TestShard',
+        number: 1,
+      };
+      let factory: NamedEnvFactory;
+      let env: NamedEnv;
+
+      beforeEach(() => {
         factory = newNamedEnvFactory(fakeEnvProps);
+        env = factory(shard);
       });
-      it('takes a shard as input', () => {
-        const testEnv = factory(shard);
-        expect(testEnv).toHaveProperty('shard');
-        expect(testEnv.shard).toEqual(shard);
+      it('sets shard according to props', () => {
+        expect(env).toHaveProperty('shard', shard);
+      });
+      it('sets name according to props', () => {
+        expect(env).toHaveProperty('name', factory.environmentName);
+      });
+      it("sets region to shard's region", () => {
+        expect(env.region).toBeDefined();
+        expect(env.region).toEqual(shard.region);
       });
     });
   });
