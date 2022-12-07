@@ -1,14 +1,6 @@
 import { Environment } from 'aws-cdk-lib';
 import { IShard } from './Shard';
 
-export interface RegionalDetails {
-  readonly asn: number;
-  /**
-   * @deprecated you should probably be using the shard's cidr.
-   */
-  readonly cidr: string; // in '0.0.0.0/32' format
-}
-
 export interface NamedEnvCommonProps {
   /**
    * If a region isn't specified, where should we default to.
@@ -16,11 +8,7 @@ export interface NamedEnvCommonProps {
    */
   readonly defaultRegion: string;
   /**
-   * A map of region => { asn, cidr }, for each region of the environment.
-   */
-  readonly regionDetails: Record<string, RegionalDetails>;
-  /**
-   * The proper name of the environment in kebab-format.
+   * The proper name of the environment.
    */
   readonly name: string;
   /**
@@ -41,6 +29,23 @@ export interface NamedEnvCommonProps {
   readonly zoneName: string;
 }
 
+interface NamedEnvFactoryCommonProps {
+  /**
+   * The numeric account id as used by cdk.Environment.account
+   */
+  readonly account: string;
+
+  /**
+   * Enumerates all existing shards grouped in the NamedEnv.
+   */
+  readonly shards: IShard[];
+}
+
+/**
+ * Used by newNamedEnvFactory. Is it used elsewhere?
+ */
+export interface NamedEnvFactoryProps extends NamedEnvCommonProps, NamedEnvFactoryCommonProps {}
+
 export interface NamedEnv extends Environment, NamedEnvCommonProps {
   /**
    * The shard within a region.
@@ -49,19 +54,16 @@ export interface NamedEnv extends Environment, NamedEnvCommonProps {
 }
 
 /**
- * Used by newNamedEnvFactory. Is it used elsewhere?
+ * Generator of NamedEnv objects.
  */
-export interface NamedEnvironmentProps extends NamedEnvCommonProps {
+export interface NamedEnvFactory extends NamedEnvFactoryCommonProps {
   /**
-   * The numeric account id as used by cdk.Environment.account
+   * The proper name of the environment.
    */
-  readonly account: string;
-}
-
-export interface NamedEnvFactory {
-  // TODO: should we add shardDetails here?
   readonly environmentName: string;
-  readonly regionDetails: Record<string, RegionalDetails>;
+  /**
+   * Callable function to generate a NamedEnv from this factory.
+   */
   (shard: IShard): NamedEnv;
 }
 
@@ -70,7 +72,7 @@ export interface NamedEnvFactory {
  * @param props
  * @returns NamedEnv
  */
-export function newNamedEnvFactory(props: NamedEnvironmentProps): NamedEnvFactory {
+export function newNamedEnvFactory(props: NamedEnvFactoryProps): NamedEnvFactory {
   if ((props.ssoStartUrl || props.ssoRegion) && !(props.ssoStartUrl && props.ssoRegion)) {
     console.warn(
       `Something is wrong for ${props.name}: ssoStartUrl = ${JSON.stringify(props.ssoStartUrl)} and ssoRegion = ${
@@ -86,7 +88,8 @@ export function newNamedEnvFactory(props: NamedEnvironmentProps): NamedEnvFactor
       region: shard.region,
     };
   };
+  namedEnvFactory.account = props.account;
   namedEnvFactory.environmentName = props.name;
-  namedEnvFactory.regionDetails = props.regionDetails;
+  namedEnvFactory.shards = props.shards;
   return namedEnvFactory;
 }
