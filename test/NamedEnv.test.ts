@@ -48,6 +48,7 @@ describe('NamedEnv', () => {
 
     describe('NamedEnvFactory', () => {
       const shard: IShard = {
+        cidr: 'fakeCidr',
         region: 'us-west-2',
         name: 'TestShard',
         number: 1,

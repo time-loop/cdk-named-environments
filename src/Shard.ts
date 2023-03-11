@@ -1,5 +1,9 @@
 export interface IShardProps {
   /**
+   * The CIDR block for a shard.
+   */
+  readonly cidr: string;
+  /**
    * The AWS region for a shard.
    */
   readonly region: string;
@@ -17,10 +21,12 @@ export interface IShard extends IShardProps {
 }
 
 export abstract class Shard implements IShard {
+  readonly cidr: string;
   readonly region: string;
   readonly number: number;
 
   constructor(props: IShardProps) {
+    this.cidr = props.cidr;
     this.region = props.region;
     this.number = props.number;
   }
