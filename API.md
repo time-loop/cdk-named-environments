@@ -475,9 +475,22 @@ new Shard(props: IShardProps)
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@time-loop/cdk-named-environments.Shard.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.name">name</a></code> | <code>string</code> | There are numerous different ways to name a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
+
+---
+
+##### `cidr`<sup>Required</sup> <a name="cidr" id="@time-loop/cdk-named-environments.Shard.property.cidr"></a>
+
+```typescript
+public readonly cidr: string;
+```
+
+- *Type:* string
+
+The CIDR block for a shard.
 
 ---
 
@@ -534,9 +547,22 @@ The AWS region for a shard.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@time-loop/cdk-named-environments.IShard.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.name">name</a></code> | <code>string</code> | The proper name for a shard (without numeric suffix). |
+
+---
+
+##### `cidr`<sup>Required</sup> <a name="cidr" id="@time-loop/cdk-named-environments.IShard.property.cidr"></a>
+
+```typescript
+public readonly cidr: string;
+```
+
+- *Type:* string
+
+The CIDR block for a shard.
 
 ---
 
@@ -585,8 +611,21 @@ The proper name for a shard (without numeric suffix).
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
+
+---
+
+##### `cidr`<sup>Required</sup> <a name="cidr" id="@time-loop/cdk-named-environments.IShardProps.property.cidr"></a>
+
+```typescript
+public readonly cidr: string;
+```
+
+- *Type:* string
+
+The CIDR block for a shard.
 
 ---
 
