@@ -58,4 +58,5 @@ tsconfig.json
 !/codecov.yml
 !/.github/workflows/renovate.yml
 !/.github/workflows/codeql-analysis.yml
+!/.github/workflows/add-to-project.yml
 !/renovate.json5
