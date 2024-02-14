@@ -485,6 +485,7 @@ new Shard(props: IShardProps)
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.name">name</a></code> | <code>string</code> | There are numerous different ways to name a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.Shard.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
+| <code><a href="#@time-loop/cdk-named-environments.Shard.property.identifier">identifier</a></code> | <code>string</code> | The shard-identifier. |
 
 ---
 
@@ -539,6 +540,18 @@ The AWS region for a shard.
 
 ---
 
+##### `identifier`<sup>Optional</sup> <a name="identifier" id="@time-loop/cdk-named-environments.Shard.property.identifier"></a>
+
+```typescript
+public readonly identifier: string;
+```
+
+- *Type:* string
+
+The shard-identifier.
+
+---
+
 
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
@@ -556,6 +569,7 @@ The AWS region for a shard.
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
+| <code><a href="#@time-loop/cdk-named-environments.IShard.property.identifier">identifier</a></code> | <code>string</code> | The shard-identifier. |
 | <code><a href="#@time-loop/cdk-named-environments.IShard.property.name">name</a></code> | <code>string</code> | The proper name for a shard (without numeric suffix). |
 
 ---
@@ -596,6 +610,18 @@ The AWS region for a shard.
 
 ---
 
+##### `identifier`<sup>Optional</sup> <a name="identifier" id="@time-loop/cdk-named-environments.IShard.property.identifier"></a>
+
+```typescript
+public readonly identifier: string;
+```
+
+- *Type:* string
+
+The shard-identifier.
+
+---
+
 ##### `name`<sup>Required</sup> <a name="name" id="@time-loop/cdk-named-environments.IShard.property.name"></a>
 
 ```typescript
@@ -620,6 +646,7 @@ The proper name for a shard (without numeric suffix).
 | <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.cidr">cidr</a></code> | <code>string</code> | The CIDR block for a shard. |
 | <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.number">number</a></code> | <code>number</code> | The shard-number within the region. |
 | <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.region">region</a></code> | <code>string</code> | The AWS region for a shard. |
+| <code><a href="#@time-loop/cdk-named-environments.IShardProps.property.identifier">identifier</a></code> | <code>string</code> | The shard-identifier. |
 
 ---
 
@@ -656,6 +683,18 @@ public readonly region: string;
 - *Type:* string
 
 The AWS region for a shard.
+
+---
+
+##### `identifier`<sup>Optional</sup> <a name="identifier" id="@time-loop/cdk-named-environments.IShardProps.property.identifier"></a>
+
+```typescript
+public readonly identifier: string;
+```
+
+- *Type:* string
+
+The shard-identifier.
 
 ---
 
