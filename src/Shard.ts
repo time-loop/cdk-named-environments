@@ -11,6 +11,10 @@ export interface IShardProps {
    * The shard-number within the region.
    */
   readonly number: number;
+  /**
+   * The shard-identifier.
+   */
+  readonly identifier?: string;
 }
 
 export interface IShard extends IShardProps {
@@ -24,11 +28,13 @@ export abstract class Shard implements IShard {
   readonly cidr: string;
   readonly region: string;
   readonly number: number;
+  readonly identifier: string | undefined;
 
   constructor(props: IShardProps) {
     this.cidr = props.cidr;
     this.region = props.region;
     this.number = props.number;
+    this.identifier = props.identifier;
   }
 
   /**
