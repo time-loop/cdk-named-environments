@@ -1462,10 +1462,25 @@
     chalk "^4.1.2"
     semver "^7.5.4"
 
-"@jsii/spec@1.87.0", "@jsii/spec@^1.85.0", "@jsii/spec@^1.87.0":
+"@jsii/check-node@1.91.0":
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.91.0.tgz#2beb99cf9c8a022d1444f524f4b7729a1bc91168"
+  integrity sha512-K9UFkRe4uJNVp1O2o4OBM/3usba6Vw3XF1Mq3TVBAYl1EzpAiA62DojGp30+3zwFlb1lkavVj1hKlCrIWIuJhw==
+  dependencies:
+    chalk "^4.1.2"
+    semver "^7.5.4"
+
+"@jsii/spec@1.87.0", "@jsii/spec@^1.87.0":
   version "1.87.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.87.0.tgz#99b9dd12ed92120e79e645538620db0526a7ad7b"
   integrity sha512-fhTT3IYmjyRKvUUWffBIuGDVVfyKC+QfE1cMyExSHl7l6wk6unrxS8qsU23kaJ5bNQAnlc2+CE1HteY2SLbepg==
+  dependencies:
+    ajv "^8.12.0"
+
+"@jsii/spec@^1.91.0":
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.91.0.tgz#91d624357a66148ab9a2d8b5fb26331fc7b01932"
+  integrity sha512-Ir01bk5CwIFAApRJjRC+JG/f9db5dACEYFSxsHyvXRMu+J/LIANdwD4OPSelWrhbRiQdY6U16BKsRO63uaNRqg==
   dependencies:
     ajv "^8.12.0"
 
@@ -4207,10 +4222,10 @@ glob-parent@^6.0.2:
   dependencies:
     is-glob "^4.0.3"
 
-glob-promise@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-6.0.3.tgz#e6b3ab02d350b3f4b3e15b57e4485986e41ba2fe"
-  integrity sha512-m+kxywR5j/2Z2V9zvHKfwwL5Gp7gIFEBX+deTB9w2lJB+wSuw9kcS43VfvTAMk8TXL5JCl/cCjsR+tgNVspGyA==
+glob-promise@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-6.0.5.tgz#3d56331b324fd7d097b43ba9e9959e9c7e200e2c"
+  integrity sha512-uUzvxo60yo/vMLXZHCNAlfdM5U5A07jCnUO8xTK44Z0Vc58poGDXhDx8ju1DmPdprOORh+4Lpog64hl+AJ5piA==
   dependencies:
     "@types/glob" "^8.0.0"
 
@@ -5306,17 +5321,17 @@ jsii-diff@^1.87.0:
     log4js "^6.9.1"
     yargs "^16.2.0"
 
-jsii-docgen@^9.1.2:
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-9.1.2.tgz#40c18908827b233eba29b2c3413665dc47ecea80"
-  integrity sha512-AmHDbyXQTSuhVr2N9HqR4iql3U3Q9jSLmGN5cxfkmQXrd3xqTAlj6EMgE6XIxdVln0R1jMml5aeoa7nUhNp4gw==
+jsii-docgen@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-10.0.0.tgz#a0eae8c7b1d7bba880bd3cc185f2aaa495606fce"
+  integrity sha512-I42yCwt9okXIp6bNVRiuCElp4dRZ6G6EybKedbX+Qm6QzyiN2xKpsprzC7nwAYX7yxlibJ/PqRiBT9J2oS06DA==
   dependencies:
-    "@jsii/spec" "^1.85.0"
+    "@jsii/spec" "^1.91.0"
     case "^1.6.3"
     fs-extra "^10.1.0"
     glob "^8.1.0"
-    glob-promise "^6.0.3"
-    jsii-reflect "^1.85.0"
+    glob-promise "^6.0.5"
+    jsii-reflect "^1.91.0"
     semver "^7.5.4"
     yargs "^16.2.0"
 
@@ -5339,7 +5354,7 @@ jsii-pacmak@^1.87.0:
     xmlbuilder "^15.1.1"
     yargs "^16.2.0"
 
-jsii-reflect@^1.85.0, jsii-reflect@^1.87.0:
+jsii-reflect@^1.87.0:
   version "1.87.0"
   resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.87.0.tgz#4302bdf1662ca09baa72fcf9216b987d1392e855"
   integrity sha512-Gk+Kat0O/+OFw1Q85HEq1Beoc6o4lqWNp7v7wZKwLLs4JFrBGOu1cIurAwfk6sFaWD2R7q85jZKs3tEbPzZlrA==
@@ -5349,6 +5364,18 @@ jsii-reflect@^1.85.0, jsii-reflect@^1.87.0:
     chalk "^4"
     fs-extra "^10.1.0"
     oo-ascii-tree "^1.87.0"
+    yargs "^16.2.0"
+
+jsii-reflect@^1.91.0:
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/jsii-reflect/-/jsii-reflect-1.91.0.tgz#026e1c4e8ed51c21787098dd5cd5240ac5c438ce"
+  integrity sha512-RRFmvscXiBHUOP9ew71gPQ2IptiHYoRaihKoLg5+SQSeCvynaJrBWhNcBy26LHd28HEN2atdzYems0+HgeQNRg==
+  dependencies:
+    "@jsii/check-node" "1.91.0"
+    "@jsii/spec" "^1.91.0"
+    chalk "^4"
+    fs-extra "^10.1.0"
+    oo-ascii-tree "^1.91.0"
     yargs "^16.2.0"
 
 jsii-release@^0.2.737:
@@ -6188,6 +6215,11 @@ oo-ascii-tree@^1.87.0:
   version "1.87.0"
   resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.87.0.tgz#77223b6d0c3382a30500b8738d7a602af1eed5ff"
   integrity sha512-AvQw3bQAiZrx1h4+LnK6s/AxhHv3cs/j4f4T+r+JOO++Qx3i0ZIf8h9/aG/O4byGQPWRKKwpjvV+74cxbJv+0g==
+
+oo-ascii-tree@^1.91.0:
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.91.0.tgz#3add7a82988966b04ac522c74ad7dccbb15bc5cf"
+  integrity sha512-pH4FFNLTO8VG+vNUm4AHmhLNjoSfQlO1UKIrzBGdeScppY785D93GVMH1XkCwbuO7pd9rrh6El5WF3a5QNvaww==
 
 open@^8.4.0:
   version "8.4.2"
