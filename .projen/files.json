@@ -14,7 +14,6 @@
     ".github/workflows/update-projen-main.yml",
     ".gitignore",
     ".mergify.yml",
-    ".npmrc",
     ".nvmrc",
     ".prettierignore",
     ".prettierrc.json",
@@ -22,6 +21,7 @@
     ".projen/files.json",
     ".projen/tasks.json",
     "codecov.yml",
+    "LICENSE",
     "renovate.json5",
     "tsconfig.dev.json"
   ],
