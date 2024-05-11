@@ -1,4 +1,5 @@
 import { clickupCdk } from '@time-loop/clickup-projen';
+import { javascript } from 'projen';
 
 const name = 'cdk-named-environments';
 const project = new clickupCdk.ClickUpCdkConstructLibrary({
@@ -11,6 +12,8 @@ const project = new clickupCdk.ClickUpCdkConstructLibrary({
   minMajorVersion: 1,
   name,
   projenrcTs: true,
+  packageManager: javascript.NodePackageManager.PNPM,
+  pnpmVersion: '9',
   repositoryUrl: `https://github.com/time-loop/${name}.git`,
 });
 project.synth();
